@@ -2,7 +2,7 @@
 
 ### Download and unzip files to working directory - commented out
 
-setwd("C:/R Files/coursera/clean_data_project")
+##setwd("C:/R Files/coursera/clean_data_project")
 ##download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip","Data_set.zip")
 ##unzip("Data_set.zip")
 
