@@ -2,7 +2,7 @@
 
 ### Download and unzip files to working directory - commented out
 
-##setwd("C:/R Files/coursera/clean_data_project")
+setwd("C:/R Files/coursera/clean_data_project")
 ##download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip","Data_set.zip")
 ##unzip("Data_set.zip")
 
@@ -27,9 +27,8 @@ Output_test= read.table("UCI HAR Dataset/test/x_test.txt", col.names = features[
 ### subset Output for measures of mean and std 
 Output_test= Output_test[,grep("*mean*|*std*",features[,2])]
 
-### Bind subject_id, activity_id, test data source identifier, and Output
-data_source = rep("test",nrow(Output_test))
-Output_test = cbind(subject_id_test,activity_id_test,data_source,Output_test)
+### Bind subject_id, activity_id, and Output
+Output_test = cbind(subject_id_test,activity_id_test,Output_test)
 
 
 
@@ -48,9 +47,8 @@ Output_train= read.table("UCI HAR Dataset/train/x_train.txt", col.names = featur
 ### subset Output for measures of mean and std 
 Output_train= Output_train[,grep("*mean*|*std*",features[,2])]
 
-### Bind subject_id, activity_id, train data source identifier, and Output
-data_source = rep("train",nrow(Output_train))
-Output_train = cbind(subject_id_train,activity_id_train,data_source, Output_train)
+### Bind subject_id, activity_id, and Output
+Output_train = cbind(subject_id_train,activity_id_train, Output_train)
 
 
 
@@ -59,7 +57,7 @@ Output_Total = rbind(Output_train,Output_test)
 
 
 ### aggregate data by subject and activity to get mean for each field
-Final_Data = aggregate(Output_Total[5:83],by=list("subject"=Output_Total$subject,"activity"=Output_Total$activity),FUN=mean, rm.na=TRUE)
+Final_Data = aggregate(Output_Total[4:82],by=list("subject"=Output_Total$subject,"activity"=Output_Total$activity),FUN=mean, rm.na=TRUE)
 
 ### Clean up Final_Data - Make subject a factor, remove spaces from column names and make more readable
 Final_Data$subject = as.factor(Final_Data$subject)
